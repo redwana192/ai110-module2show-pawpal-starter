@@ -1,0 +1,14 @@
+Today's Schedule (2026-11-01)
+08:00 | Biscuit | Morning walk  | 20 min | high
+08:00 | Mochi   | Breakfast     | 10 min | high
+12:00 | Mochi   | Grooming      | 15 min | medium
+18:00 | Biscuit | Evening walk  | 30 min | low
+
+Conflict warnings:
+WARNING: 2026-11-01 08:00 — Biscuit: Morning walk; Mochi: Breakfast
+
+Pending tasks for Mochi: 2
+30-minute plan: Morning walk, Breakfast
+Deferred: Grooming, Evening walk
+Completed Morning walk; next occurrence: 2026-11-02 08:00
+Completed tasks: 1
