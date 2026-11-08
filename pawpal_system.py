@@ -41,7 +41,7 @@ class Task:
         if type(self.duration_minutes) is not int or self.duration_minutes <= 0:
             raise ValueError('Duration must be a positive whole number.')
 
-    def mark_complete(self):
+    def mark_complete(self, completed_on=None):
         """Complete this occurrence once and return its next occurrence, if any."""
         if self.completed:
             return None
@@ -49,7 +49,8 @@ class Task:
         days = {'daily': 1, 'weekly': 7}.get(self.frequency)
         if days is None:
             return None
-        return replace(self, due_date=self.due_date + timedelta(days=days),
+        completion_date = completed_on if completed_on is not None else date.today()
+        return replace(self, due_date=completion_date + timedelta(days=days),
                        completed=False, id=uuid4().hex)
 
 
@@ -110,11 +111,11 @@ class Scheduler:
             and (on_date is None or task.due_date == on_date)
         ])
 
-    def mark_task_complete(self, task_id):
+    def mark_task_complete(self, task_id, completed_on=None):
         """Complete an owned task and attach its next recurring occurrence."""
         for pet, task in self.owner.all_tasks():
             if task.id == task_id:
-                next_task = task.mark_complete()
+                next_task = task.mark_complete(completed_on)
                 if next_task is not None:
                     pet.add_task(next_task)
                 return next_task

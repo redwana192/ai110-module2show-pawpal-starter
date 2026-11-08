@@ -21,4 +21,4 @@ ChatGPT/Codex, one conversation. The user supplied the Week 4 CodePath requireme
 - Actual output is stored in evidence/ and copied into README.md.
 
 ## Limitations and student review
-The starter repository and instructions were inspected through web retrieval. Direct GitHub cloning was unavailable in the preparation environment, so the package contains a standalone local Git history. The student must create their CodePath fork and connect it before pushing. No remote push or submission has occurred. The student should run the tests, try the UI, review the reflection, and add their own observations. No fabricated prompts or personal review claims are included.
+Redwan ran the CLI demo and the original 29 tests on Windows, opened the app, added a pet, and pushed the project to his GitHub fork. During submission review, the recurrence rule was corrected to use the completion date, and a regression test was added for an overdue daily task.

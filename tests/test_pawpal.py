@@ -51,7 +51,7 @@ def test_recurrence_and_year_rollover(frequency, days):
     _, dog, _, scheduler = household()
     original = task(frequency=frequency, priority='high', duration_minutes=20)
     dog.add_task(original)
-    upcoming = scheduler.mark_task_complete(original.id)
+    upcoming = scheduler.mark_task_complete(original.id, completed_on=DAY)
     assert original.completed
     assert upcoming.due_date == DAY + timedelta(days=days)
     assert not upcoming.completed and upcoming.id != original.id
@@ -143,3 +143,12 @@ def test_unknown_task_and_invalid_budget():
         scheduler.mark_task_complete('missing')
     with pytest.raises(ValueError):
         scheduler.build_plan(DAY, -1)
+
+
+def test_overdue_daily_task_repeats_from_completion_date():
+    _, dog, _, scheduler = household()
+    overdue = task(due_date=date(2000, 1, 1), frequency='daily')
+    dog.add_task(overdue)
+    today = date.today()
+    upcoming = scheduler.mark_task_complete(overdue.id)
+    assert upcoming.due_date == today + timedelta(days=1)

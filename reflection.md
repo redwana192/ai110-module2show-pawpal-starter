@@ -1,7 +1,5 @@
 # PawPal+ Project Reflection
 
-Draft for Redwan to review after running the project. Edit statements to match your own understanding and experience.
-
 ## 1. System Design
 
 ### Three core user actions
@@ -26,18 +24,18 @@ Conflict detection checks identical dates and start times, including tasks for d
 ## 3. AI Collaboration
 
 ### 3a. How AI was used
-ChatGPT prepared the design, class skeleton, implementation, tests, and documentation using file editing and terminal commands. CLI output and automated tests were used to check the work. This was one conversation, rather than separate chats for each phase. Separating design, implementation, and testing into distinct steps helped keep the work organized. The student still needs to run the package locally and review these explanations.
+ChatGPT prepared the design, class skeleton, implementation, tests, and documentation using file editing and terminal commands. CLI output and automated tests were used to check the work. The AI work was organized into design, implementation, and testing steps within one conversation. Redwan ran the terminal demo and automated tests on Windows, opened the Streamlit app, and added a pet.
 
 ### 3b. Judgment and verification
-The implementation avoids letting UI button handlers independently create recurring tasks. Instead, the Scheduler controls completion and attachment of the next occurrence. Tests check that a second completion does not create another copy. This was an implementation decision made during the AI-assisted build; it should not be described as a suggestion personally rejected by the student unless that occurred during review.
+The implementation avoids letting UI button handlers independently create recurring tasks. Instead, the Scheduler controls completion and attachment of the next occurrence. Tests check that a second completion does not create another copy. During submission review, the recurrence rule was revised to use the completion date so that completing an overdue task does not schedule another occurrence in the past.
 
 ## 4. Testing and Verification
 
 ### 4a. What was tested
-The 29 tests cover task addition and completion, sorting, combined filters, daily and weekly recurrence, year rollover, duplicate completion, conflicts, empty households, priority budgets, invalid inputs, and UI actions. Streamlit AppTest checks adding a pet, session persistence, adding a task, warnings, editing, and completing a recurring task.
+The tests cover task addition and completion, sorting, combined filters, daily and weekly recurrence, year rollover, duplicate completion, conflicts, empty households, priority budgets, invalid inputs, and UI actions. Streamlit AppTest checks adding a pet, session persistence, adding a task, warnings, editing, and completing a recurring task.
 
 ### 4b. Confidence
-Provisional confidence: 4/5 based on passing automated tests in the preparation environment. The student's Windows setup and manual walkthrough still need checking. More testing could cover browser accessibility, many pets, and long-term storage. The app uses session memory and does not save data permanently.
+Confidence is 4/5. The original 29 tests passed on Windows, and the browser check confirmed that the app opened and accepted a pet. More testing could cover browser accessibility, many pets, and long-term storage. The app uses session memory and does not save data permanently.
 
 ## 5. Reflection
 
@@ -45,7 +43,7 @@ Provisional confidence: 4/5 based on passing automated tests in the preparation 
 The CLI and browser interface use the same backend. That makes the scheduling rules easier to test independently.
 
 ### 5b. What could improve
-Add persistent storage, overlapping-duration detection, and clearer reminders for overdue care. Recurrence currently advances from the original due date, so a late task may generate another overdue occurrence.
+Add persistent storage, overlapping-duration detection, and clearer reminders for overdue care. A future version could let owners choose whether a recurring task follows a fixed calendar or restarts its interval after completion.
 
 ### 5c. Key takeaway
 AI can prepare a lot of code quickly, but the person responsible for the project needs to understand the design, verify behavior, and accurately describe what they reviewed.

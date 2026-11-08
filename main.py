@@ -25,7 +25,7 @@ def main():
     selected, skipped = scheduler.build_plan(day, 30)
     print('30-minute plan:', ', '.join(task.description for _, task in selected))
     print('Deferred:', ', '.join(task.description for _, task in skipped))
-    next_task = scheduler.mark_task_complete(dog.tasks[1].id)
+    next_task = scheduler.mark_task_complete(dog.tasks[1].id, completed_on=day)
     print(f'Completed Morning walk; next occurrence: {next_task.due_date} {next_task.time}')
     print('Completed tasks:', len(scheduler.filter_tasks(completed=True)))
 

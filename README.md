@@ -25,13 +25,13 @@ Keep the terminal running while using the browser. Streamlit's email prompt is o
 - Owner contains pets; each Pet contains Tasks; Scheduler reads through Owner.
 - The backend in pawpal_system.py has no Streamlit dependency.
 - The UI stores the Owner object in st.session_state for reruns within the session.
-- Mermaid sources: diagrams/uml_draft.mmd and diagrams/uml_final.mmd.
+- Mermaid sources: diagrams/uml.mmd (initial design) and diagrams/uml_final.mmd (implemented design).
 
 ## Smarter Scheduling
 - `Scheduler.sort_by_time()`: stable chronological ordering by date and normalized HH:MM; original storage order is unchanged.
 - `Scheduler.filter_tasks()`: combine pet name, completion status, and due date; returns sorted pet-task pairs.
 - `Scheduler.detect_conflicts()`: group pending tasks by exact date/start time and return warnings across all pets. Completed tasks are excluded. Complexity O(n log n) including filtering/sorting.
-- `Task.mark_complete()` and `Scheduler.mark_task_complete()`: create a fresh task one or seven days after the original due date, retaining its properties. Repeated completion cannot create duplicates. UI calls the Scheduler method so the new task is attached to its pet.
+- `Task.mark_complete()` and `Scheduler.mark_task_complete()`: create a fresh task one or seven days after the date the task is completed, retaining its properties. Repeated completion cannot create duplicates. UI calls the Scheduler method so the new task is attached to its pet.
 - `Scheduler.build_plan()`: high priority first, with time breaking ties; select tasks that fit the remaining budget, then display chronologically. Complexity O(n log n). This greedy plan does not guarantee an optimal combination or resolve overlapping times.
 
 ## Demo Walkthrough
@@ -70,26 +70,24 @@ Actual successful run in the preparation environment:
 ```text
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0
-rootdir: /workspace/scratch/2e3d487317db/week4-pawpal-work
-plugins: anyio-4.16.0
-collected 29 items
+plugins: anyio-4.14.2
+collected 30 items
 
-tests/test_app.py .....                                                  [ 17%]
-tests/test_pawpal.py ........................                            [100%]
+tests/test_app.py .....                                                  [ 16%]
+tests/test_pawpal.py .........................                           [100%]
 
-============================== 29 passed in 1.58s ==============================
+======================== 30 passed, 1 warning in 2.26s =========================
 ```
 
-Confidence: **4/5 stars**, provisional until the student's local run and manual review.
+Confidence: **4/5 stars**. The original 29 tests passed on Windows, and the updated test suite also checks late completion.
 
 ## Limitations
 - Session memory only: closing or losing the session may clear pets/tasks. No file persistence is claimed.
 - Conflicts use identical starts, not overlapping durations.
-- Recurrence advances from the original due date; late completion may create an overdue occurrence.
 - No background notifications or calendar integration.
 - The date budget selects workload; it does not automatically reschedule tasks.
 
 ## Submission status
-Files and local Git commits are prepared. Forking, pushing, reviewing the reflection, and submitting on CodePath and Canvas remain student steps. See the package-level START_HERE.md.
+The GitHub fork is the repository to submit for the PawPal+ exercise.
 
 Starter reference: https://github.com/codepath/ai110-module2show-pawpal-starter

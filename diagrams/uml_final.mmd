@@ -23,13 +23,13 @@ classDiagram
         duration_minutes: int
         priority: str
         id: str
-        mark_complete()
+        mark_complete(completed_on)
     }
     class Scheduler {
         owner: Owner
         sort_by_time(tasks)
         filter_tasks(pet_name, completed, on_date)
-        mark_task_complete(task_id)
+        mark_task_complete(task_id, completed_on)
         detect_conflicts(on_date)
         build_plan(on_date, available_minutes)
     }
